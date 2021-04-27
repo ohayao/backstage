@@ -46,7 +46,8 @@ workflows:
             - Server
           filters:
             branches:
-              - master
+              only:
+                - master
   build_development:
     jobs:
       - build:

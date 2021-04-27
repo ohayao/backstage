@@ -21,7 +21,7 @@ jobs:
           name: "build service application 'hello_app'"
           command: |
             cd service
-            go build app.go -o hello_app
+            go build -o hello_app app.go
             cd ..
       - run:
           name: "sync project"

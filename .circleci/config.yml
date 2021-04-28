@@ -39,13 +39,8 @@ jobs:
               kill -9 \$(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print \$2}') >> sh.log
             fi;
             " > temp0001.sh'
-            ssh ${ServerUser}@${ServerHost} 'netstat -nlp |grep :8090 |grep hello_app |awk "{print $7}" |awk -F"/" "{ print $1 }" >> aaaaab.txt'
-
-            ssh ${ServerUser}@${ServerHost} \
-            "lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}' >> aaaaaa.txt; if [ $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') ]; \
-            then kill -9 $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') >> aaaaaa.txt;fi; \
-            nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &
-            "
+            ssh ${ServerUser}@${ServerHost} 'netstat -nlp |grep :8090 |grep hello_app |awk "{print \$7}" |awk -F"/" "{ print \$1 }" >> aaaaab.txt'
+            ssh ${ServerUser}@${ServerHost} "kill -9 $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print \$2}') >> aaaaaa.txt"
             ssh ${ServerUser}@${ServerHost} \
             "nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &"
 workflows:

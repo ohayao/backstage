@@ -32,10 +32,8 @@ jobs:
       - run:
           name: "rerun service application"
           command: |
-            ssh ${ServerUser}@${ServerHost} 'netstat -nlp |grep :8090 |grep hello_app |awk "{print \$7}" |awk -F"/" "{ print $1 }" >> aaaaab.txt'
             ssh ${ServerUser}@${ServerHost} "kill -9 \$(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') >> aaaaaa.txt"
-            ssh ${ServerUser}@${ServerHost} \
-            "nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &"
+            ssh ${ServerUser}@${ServerHost} "nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &"
 workflows:
   version: 2
   build_production:

@@ -32,9 +32,13 @@ jobs:
       - run:
           name: "rerun service application"
           command: |
-            ssh ${ServerUser}@${ServerHost} 'lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk "{print $2}" >> aaaaab.txt'
-            ssh ${ServerUser}@${ServerHost} "lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}' >> aaaaab.txt"
-            ssh ${ServerUser}@${ServerHost} 'echo 1000000000 >> aaaaab.txt'
+            ssh ${ServerUser}@${ServerHost} 'echo "
+            #!/bin/bash
+            lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}' >> sh.log
+            if [ $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') ]; then
+              kill -9 $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') >> sh.log
+            fi;
+            " > temp0001.sh'
             ssh ${ServerUser}@${ServerHost} 'netstat -nlp |grep :8090 |grep hello_app |awk "{print $7}" |awk -F"/" "{ print $1 }" >> aaaaab.txt'
 
             ssh ${ServerUser}@${ServerHost} \

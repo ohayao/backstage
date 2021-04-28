@@ -34,6 +34,8 @@ jobs:
           command: |
             ssh ${ServerUser}@${ServerHost} 'lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk "{print $2}" >> aaaaab.txt'
             ssh ${ServerUser}@${ServerHost} "lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}' >> aaaaab.txt"
+            ssh ${ServerUser}@${ServerHost} 'lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}' >> aaaaab.txt'
+
             ssh ${ServerUser}@${ServerHost} \
             "lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}' >> aaaaaa.txt; if [ $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') ]; \
             then kill -9 $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') >> aaaaaa.txt;fi; \

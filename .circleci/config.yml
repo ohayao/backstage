@@ -33,7 +33,10 @@ jobs:
           name: "rerun service application"
           command: |
             ssh ${ServerUser}@${ServerHost} \
-            "if [ $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') ];then kill -9 $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}');fi"
+            "if [ $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') ]; \
+            then kill -9 $(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}');fi; \
+            nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &
+            "
             ssh ${ServerUser}@${ServerHost} \
             "nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &"
 workflows:

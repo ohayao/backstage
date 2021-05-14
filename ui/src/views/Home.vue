@@ -1,18 +1,27 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+    <div>
+        <p>Home</p>
+        <Alert :message="message" :isShow="false"></Alert>
+        <Alert :isShow="false" />
+    </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
-  },
-});
+    import { defineComponent } from 'vue';
+    import Alert from '../plugins/alert/alert.vue';
+    export default defineComponent({
+        name: 'Home',
+        components:{
+            Alert
+        },
+        data(){
+            return{
+                message:{
+                    title:'abcdefg',
+                    content:'content',
+                    visible:true
+                }
+            }
+        }
+    });
 </script>

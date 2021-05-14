@@ -1,0 +1,7 @@
+{
+    "vetur.validation.template": false,
+    "files.exclude": {
+        "ui/node_modules/": true
+    },
+    "vue3snippets.enable-compile-vue-file-on-did-save-code": true
+}

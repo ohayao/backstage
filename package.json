@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@vue/composition-api": "^1.0.0-rc.8",
+    "pinia": "^2.0.0-alpha.18"
+  }
+}

@@ -38,7 +38,9 @@
       <h3 class="title">Actions</h3>
       <div class="content">
         <button class="btn" @click="actionsChangeHobby">翻转昵称</button>
-        <button class="btn" @click="actionsAsyncChangeHobby">调用异步方法</button>
+        <button class="btn" @click="actionsAsyncChangeHobby">
+          调用异步方法
+        </button>
         <span class="msg">
           <p class="tips">使用dispatch触发actions方法</p>
           <p>{{ nick }} {{ hobby }}</p>
@@ -48,33 +50,21 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
-import { useStore } from "vuex";
-import { Key as UserKey } from "@/store/modules/user";
-import { Key as StudentKey } from "@/store/modules/student";
+import { defineComponent, reactive, toRefs } from 'vue';
+import { useStore } from 'vuex';
+import { Key as UserKey } from '@/store/modules/user';
+import { Key as StudentKey } from '@/store/modules/student';
 export default defineComponent({
   setup() {
-    const pets = [
-      "dog",
-      "cat",
-      "bird",
-      "fish",
-      "chick",
-      "duck",
-      "pig",
-      "tigger",
-      "snake",
-    ];
+    const pets = ['dog', 'cat', 'bird', 'fish', 'chick', 'duck', 'pig', 'tigger', 'snake'];
     const store = useStore(UserKey);
-
+    const user = store.state;
     {
       //获取其它state模块
       const studentStore = useStore(StudentKey);
       const student = studentStore.state;
       console.log(student);
     }
-
-    const user = store.state;
     const rndPet = () => {
       return pets[(Math.random() * 10) | 0];
     };
@@ -82,34 +72,34 @@ export default defineComponent({
       store.state.hobby![0] = rndPet();
     };
     const reverseNick = () => {
-      store.commit("changeNick");
+      store.commit('changeNick');
       //另一种写法
       setTimeout(() => {
         store.commit({
-          type: "changeNick",
+          type: 'changeNick'
         });
       }, 1e3);
     };
     const changeHobbys = () => {
-      store.commit("changeHobby", { index: 0, value: rndPet() });
+      store.commit('changeHobby', { index: 0, value: rndPet() });
       store.commit({
-        type: "changeHobby",
+        type: 'changeHobby',
         index: 1,
-        value: rndPet(),
+        value: rndPet()
       });
     };
     const actionsChangeHobby = () => {
-      store.dispatch("changeNick");
+      store.dispatch('changeNick');
       setTimeout(() => {
         store.dispatch({
-          type: "changeNicks",
-          name: "zhangsan",
+          type: 'changeNicks',
+          name: 'zhangsan'
         });
       }, 1e3);
     };
     const actionsAsyncChangeHobby = () => {
-      store.dispatch("changeNicksAsync", { timeout: 1e3 * 2 }).then(() => {
-        console.log("异步方法执行完毕");
+      store.dispatch('changeNicksAsync', { timeout: 1e3 * 2 }).then(() => {
+        console.log('异步方法执行完毕');
       });
     };
     return {
@@ -120,9 +110,9 @@ export default defineComponent({
       changeHobbys,
       reverseNick,
       actionsChangeHobby,
-      actionsAsyncChangeHobby,
+      actionsAsyncChangeHobby
     };
-  },
+  }
 });
 </script>
 <style lang="less" scoped>
@@ -141,7 +131,7 @@ export default defineComponent({
       box-shadow: 2px 2px 5px #000;
     }
   }
-  input[type="text"] {
+  input[type='text'] {
     padding: 10px 7px;
     margin: 5px;
   }

@@ -2,11 +2,6 @@
   <router-view />
 </template>
 <style lang="less">
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import 'https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.min.css';
+@import '@/assets/less/global.less';
 </style>

@@ -1,30 +1,11 @@
-import { createStore } from 'vuex';
-import {SOther} from './context/other';
-export default createStore({
-  // state:{
-  //   userss:{}
-  // },
-  // mutations: {
-  // },
-  // actions: {
-  // },
-  modules: {
-    SOther
-  }
-});
-// import{SUser,IUser} from './context/session';
-// import {SOther,IOther} from './context/other';
-
-// const store= createStore({
-//   modules:{
-//     SUser,
-//     SOther
-//   }
-// });
-// export default store;
-// export{
-//   SUser,
-//   IUser,
-//   SOther,
-//   IOther
-// }
+import * as ml from './MenuLeft/index';
+// import * as student from './modules/student';
+// import * as framer from './modules/backframer'
+// import * as treemenus from './modules/treemenus'
+const stores = [
+  { key: ml.Key, name: ml.storeMenuLeft }
+  // { key: student.Key, name: student.StudentStore },
+  // { key: framer.Key, name: framer.FramerStore },
+  // {key:treemenus.Key,name:treemenus.menuStore}
+];
+export { stores };

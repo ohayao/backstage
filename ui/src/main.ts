@@ -1,17 +1,11 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './assets/less/global.less';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import { stores } from './store/index';
 
-import Global from './plugins/global.vue';
-
-import {SUser} from './store/context/session';
-
-const app=createApp(App);
-app.use(store);
-app.use(SUser);
-//app.use(SOther);
+const app = createApp(App);
+stores.forEach((s, i) => {
+  app.use(s.name, s.key);
+});
 app.use(router);
-app.component('Global',Global);
 app.mount('body');

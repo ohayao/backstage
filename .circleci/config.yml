@@ -27,6 +27,7 @@ jobs:
           name: "npm run build 发布后台ui文件"
           command: |
             cd ui
+            apt install nodejs
             npm install
             npm run build
             cd ..

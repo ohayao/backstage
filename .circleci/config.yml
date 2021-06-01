@@ -36,7 +36,7 @@ jobs:
           name: "sync project"
           command: |
             rsync -e "ssh -o StrictHostKeyChecking=no" \
-            -exclude ui/node_modules/
+            -exclude ui/node_modules/ \
             -av ./ \
             ${ServerUser}@${ServerHost}:/${ServerUser}/backstage
       - run:

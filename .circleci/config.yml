@@ -28,6 +28,7 @@ jobs:
           command: |
             cd ui
             sudo apt install nodejs
+            sudo apt-get update
             npm install
             npm run build
             cd ..

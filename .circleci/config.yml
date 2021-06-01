@@ -36,20 +36,14 @@ jobs:
           name: "sync project"
           command: |
             rsync -e "ssh -o StrictHostKeyChecking=no" \
+            --exclude 'ui/node_modules' \
             -av ./ \
             ${ServerUser}@${ServerHost}:/${ServerUser}/backstage
       - run:
           name: "rerun service application"
-          # command: |
-          #   ssh ${ServerUser}@${ServerHost} "kill -9 \$(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') > /dev/null 2>&1 &"
-          #   ssh ${ServerUser}@${ServerHost} "nohup ~/backstage/service/hello_app >> ~/backstage/backlogs.log 2>&1 &"
           command: |
             ssh ${ServerUser}@${ServerHost} "kill -9 \$(lsof -i:8090 |grep hello_app |grep \(LISTEN\) |awk '{print $2}') > /dev/null 2>&1 &"
-            ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service && pwd >> ../backlogs.log"
-            ssh ${ServerUser}@${ServerHost} "echo '12345689' >> ~/backstage/backlogs.log"
-            ssh ${ServerUser}@${ServerHost} "pwd >> ~/backstage/backlogs.log"
             ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service; nohup ./hello_app >> ../backlogs.log 2>&1 &"
-          #  ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service && nohup ./hello_app >> ../backlogs.log 2>&1 &"
 workflows:
   version: 2
   build_production:

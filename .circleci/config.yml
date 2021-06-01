@@ -48,7 +48,7 @@ jobs:
             ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service && pwd >> ../backlogs.log"
             ssh ${ServerUser}@${ServerHost} "echo '12345689' >> ~/backstage/backlogs.log"
             ssh ${ServerUser}@${ServerHost} "pwd >> ~/backstage/backlogs.log"
-            ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service && nohup ./hello_app >> ../backlogs.log 2>&1 && echo 123456"
+            ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service; nohup ./hello_app >> ../backlogs.log 2>&1 &"
           #  ssh ${ServerUser}@${ServerHost} "cd ~/backstage/service && nohup ./hello_app >> ../backlogs.log 2>&1 &"
 workflows:
   version: 2

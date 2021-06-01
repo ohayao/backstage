@@ -6,12 +6,14 @@
         </div>
         <Header></Header>
         <div class="container">
-            <keep-alive>
-                <iframe v-if="aMenu && sML.getters.isNewBlank(aMenu)" :src="aMenu.Href"></iframe>
-                <div class="content" v-else>
-                    <router-view v-show="isReload"></router-view>
-                </div>
-            </keep-alive>
+            <iframe v-if="aMenu && sML.getters.isNewBlank(aMenu)" :src="aMenu.Href"></iframe>
+            <div class="content" v-else>
+                <router-view v-slot="{ Component }" v-show="isReload">
+                    <keep-alive :key="key">
+                        <component class="view" :is="Component" />
+                    </keep-alive>
+                </router-view>
+            </div>
         </div>
     </div>
 </template>
@@ -21,7 +23,7 @@ import MenuLeft from '@/components/layouts/back/menuLeft.vue';
 import Header from '@/components/layouts/back/header.vue';
 import { IMenuItem, Key } from '@/store/MenuLeft/index';
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 export default defineComponent({
     components: {
         MenuLeft,
@@ -30,6 +32,7 @@ export default defineComponent({
     setup() {
         const sML = useStore(Key);
         const router = useRouter();
+        const route = useRoute();
         const toOpenMenu = sML.getters.getItem(sML.state.CurrentMenuID) as IMenuItem;
         onMounted(() => {
             //设置默认展开的菜单
@@ -65,7 +68,10 @@ export default defineComponent({
                 return sML.getters.getItem(sML.state.CurrentMenuID) as IMenuItem;
             }),
             isReload,
-            isFold
+            isFold,
+            key: computed(() => {
+                return !isReload.value ? route.path + '?t=' + Date.now() : '';
+            })
         };
     }
 });

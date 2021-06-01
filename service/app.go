@@ -12,6 +12,7 @@ func main() {
 	mvc.Router.RegisterAction("get", []string{"/"}, func(c *mvc.HTTPContext) {
 		c.Text(200, "It's "+time.Now().Format("2006/01/02 15:04:05"))
 	})
+	mvc.Router.RegisterStatic("/ui", "../ui/dist", "index.html", nil)
 	fmt.Printf("Service run [localhost:8090] at %s\n", time.Now().Format("2006/01/02 15:04:05"))
 	log.Fatal(mvc.Run(8090))
 }

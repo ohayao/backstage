@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.16
+      - image: circleci/nodejs:14.17
     working_directory: ~/project
     steps:
       - checkout
@@ -14,11 +15,11 @@ jobs:
           command: |
             sudo apt-get update 
             sudo apt-get install rsync
-            curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-            sudo apt-get install -y nodejs
             ssh-keyscan ${ServerHost} >> ~/.ssh/known_hosts
             export GOPRIVATE="github.com/ohayao"
             git config --global url."https://ohayao:${token}@github.com/ohayao".insteadOf "https://github.com/ohayao"
+          # curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          # sudo apt-get install -y nodejs
       - run:
           name: "build service application 'hello_app'"
           command: |

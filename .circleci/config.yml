@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.16
-      - image: circleci/nodejs:14.x
+      - image: circleci/node
     working_directory: ~/project
     steps:
       - checkout

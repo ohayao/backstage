@@ -1,9 +1,10 @@
+orbs:
+  node: circleci/node@14.17
 version: 2
 jobs:
   build:
     docker:
       - image: circleci/golang:1.16
-      - image: circleci/node
     working_directory: ~/project
     steps:
       - checkout
